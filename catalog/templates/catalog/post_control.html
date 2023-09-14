@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% block title %}Управление категориями{% endblock %}
+  {% block content %}
+
+    <div class="text-center" style="margin-top:40px; margin-bottom:40px">
+      <form method="get" id="filter">
+          <p><a class="nav-link fw-bold py-1 px-0" href="{% url 'category_control' %}">Управление категориями</a></p>
+        {{ filter.form.as_p }}
+        <input type="submit" class="filter-button">
+      </form>
+    </div>
+
+    <div class="main1">
+    {% for design in filter.qs %}
+      <div class="features">
+          <p>Название: {{ design.name }}</p>
+          <img src="{{ design.image.url}}" alt="connect" style="max-height:150px">
+           <p class="text">Описание: {{ design.info }}</p>
+          <p>Cтатус: {{ design.get_status_display }}</p>
+          <p>Категория: {{ design.category}}</p>
+          <p>Комментарий: {{ design.comment }}</p>
+          <p>Дата: {{ design.date }} </p>
+          <p>User: {{ design.user }} </p>
+          <p>{{ category.id }}</p>
+          <p><a href="{% url 'delete_post1' design.id %}"><strong>Удалить заявку?</strong></a></p>
+          {% if design.status == "new" %}
+            <p><a href="{% url 'update_form_new' design.id %}"><strong>Изменить заявку?</strong></a></p>
+          {% else %}
+            <p><a href="{% url 'update_form_ready' design.id %}"><strong>Изменить заявку?</strong></a></p>
+          {% endif %}
+        </div>
+    {% endfor %}
+
+    </div>
+
+
+  </div>
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+  $("#filter .filter-button").hide();
+  $(document).on("change", "#filter", function(e) {
+    $(this).submit();
+  });
+</script>
+
+</html>
+{% endblock %}

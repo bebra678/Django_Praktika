@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block title %}Управление категориями{% endblock %}
+{% block content %}
+    <div class="category_control">
+      <p><h2>Управление категориями</h2></p>
+        {% for category in category_list %}
+          <div class="design">
+            <p><a href="{% url 'delete_category' category.pk %}">Категория: {{category}}</a> </p>
+          </div>
+        {% endfor %}
+    </div>
+  {% endblock %}

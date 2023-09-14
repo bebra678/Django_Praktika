@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block title %}Главная{% endblock %}
+  {% block content %}
+    {% if design_list %}
+      {% for design in design_list %}
+      <div class="features">
+        <p>Название: {{ design.name }}</p>
+        <img src="{{ design.image.url}}" alt="connect" style="max-height:150px">
+        <p>Описание: {{ design.info }}</p>
+        <p>Cтатус: {{ design.get_status_display }}</p>
+        <p>Категория: {{ design.category }}</p>
+        <p>Дата: {{ design.date }} </p>
+        {% if user.is_staff %}
+        <p>Пользователь : {{ design.user.get_username }}</p>
+        {% endif %}
+      </div>
+      {% endfor %}
+    {% else %}
+      <p>Заявок нет</p>
+    {% endif %}
+<!--  <footer class="mt-auto text-white-50">-->
+<!--    <p><strong>Всего заявок: </strong> {{ design_list|length }}</p>-->
+<!--  </footer>-->
+  {% endblock %}
+
+

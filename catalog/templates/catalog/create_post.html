@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block title %}Главная{% endblock %}
+  {% block content %}
+<div class="category_control">
+<main class="form-signin w-100 m-auto">
+<table style="display: flex; justify-content: space-around;">
+    <h1>Создание заявки</h1>
+    <p>Следуйте этой форме:</p>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <button type="submit">Создать заявку</button>
+        </form>
+    </table>
+</main>
+    </div>
+  {% endblock %}
